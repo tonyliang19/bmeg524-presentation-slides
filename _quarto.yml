@@ -1,13 +1,10 @@
 bibliography: ref.bib
-suppress-bibliography: true
 format: 
   revealjs:
     theme: [default, custom_theme.scss]
     css: tachyons-minimal.css
-    width: 1280
-    #width: 1600
-    #height: 900
-    height: 720
+    width: 1600
+    height: 900
     html-math-method: mathjax
     slide-number: true
     fig-format: png
