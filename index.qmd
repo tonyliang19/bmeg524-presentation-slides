@@ -1,0 +1,48 @@
+---
+talk-title: " Cooperative learning for multiview analysis"
+talk-descrip: "..."
+author: "Tony Liang"
+course: "BMEG524"
+talk-date: "March 18, 2024"
+format: revealjs
+---
+
+## 
+
+::: {.f2}
+
+{{< meta talk-descrip >}}
+
+:::
+
+<br>
+
+<br>
+
+
+::: {.f3 .bold}
+
+{{< meta author >}} 
+
+Msc student in Bioinformatics
+
+{{< meta course >}}
+
+{{< meta talk-date >}}
+
+:::
+
+<!-- {{< include _titleslide.qmd >}} -->
+
+
+## Slide 1
+
+- list
+
+## Slide 2
+
+- list
+
+## {#acknowledgements .smaller}
+
+- list
