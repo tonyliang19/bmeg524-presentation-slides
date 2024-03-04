@@ -6,9 +6,15 @@ talk-date: "March 18, 2024"
 format: revealjs
 ---
 
+<!--- This looks very ugly TODO: FIX THIS --->
+
 ## 
 
-::: {.f2 }
+<br>
+
+<br>
+
+::: {.primary .bold .justify-center .f-subheadline .tj .flex}
 
 {{< meta talk-title  >}}
 
@@ -19,27 +25,100 @@ format: revealjs
 <br>
 
 
-::: {.f3 .bold}
+::: {.f2 .bold}
 
 {{< meta author >}} 
 
-<!-- Msc student in Bioinformatics -->
 
 {{< meta course >}}
 
+
 {{< meta talk-date >}}
 
+::: 
+
+
+
+## Introduction
+
+
+The paper is from @ding2022cooperative
+
+
+## Motivation and background 1
+
+::: {.callout-note}
+- What kind of data does the algorith take
+:::
+
+## Motivation and background 2
+
+::: {.callout-note}
+- When would you want to do this analysis
+:::
+
+## Motivation and background 3
+
+::: {.callout-note}
+- What does it tell you
+:::
+
+## Algorithm 1
+
+::: {.callout-note}
+- What is the theoretical underpinnings of the approach
+:::
+
+## Algorithm 2
+
+::: {.callout-note}
+- How does it work?
+:::
+
+## Algorithm 3
+
+::: {.callout-note}
+- What considerations are there when applying it?
+:::
+
+## Quality control measures 1
+
+::: {.callout-note}
+- How can you determine whether it worked?
+:::
+
+## Quality control measures 2
+
+::: {.callout-note}
+- What happens if your data were bad?
 :::
 
 
-## Slide 1
+## Analysis 1
 
-- list
+::: {.callout-note}
+- Are there special analysis considerations?
+:::
 
-## Slide 2
+## Analysis 2
 
-- list
+::: {.callout-note}
+- Controlling for sources of bias
+:::
 
-## {#acknowledgements .smaller}
+## Analysis 3
 
-- list
+::: {.callout-note}
+- Insights into analysis?
+:::
+
+## Analysis 4
+
+::: {.callout-note}
+- What is the biological interpretation?
+:::
+## {#end}
+
+Thank you!
+
+Questions?
