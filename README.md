@@ -9,4 +9,4 @@ Following the rubric from [here](https://docs.google.com/document/d/1SYaXXjI_-s6
 
 ## Formats
 
-- Presentation should be 20 Min , with 5 Min Q&A
+- Presentation should be 17 Min , with 5 Min Q&A, total of 22min
