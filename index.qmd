@@ -36,23 +36,81 @@ format: revealjs
 
 
 
-## Introduction
+## Multiomics data
+
+Different types of molecular measurements (omics) from common set of samples
+
+- Genomics
+- Proteomics
+- Metabolomics
+- And more
 
 
-The paper is from @ding2022cooperative
+## Types of fusion strategy
+
+- Early
+
+  - Merge multiple data views into single representation than feed to model
+
+- Late
+  
+  - Individual models fit on distinct view, then predictions of thes models are combined into final predictor
+
+- Mixing of both
+
+Analogy to LASSO, Ridge or elastic-net
+
+## Paper
+
+The paper is from @ding2022cooperative, supervised learning algorithm that focus on disease classification and treatment response prediction
+
+::: {.fragment}
+
+- Addresses "fusion" in data-adaptive manner
+- Combines different omics together, they call this "view"
+
+:::
 
 
 ## Motivation and background 1
 
-::: {.callout-note}
-- What kind of data does the algorith take
-:::
-
-## Motivation and background 2
+Takes in data from various modalities mentioned earlier, integrating heterogenous features on common set of observations (say patients)
 
 ::: {.callout-note}
-- When would you want to do this analysis
+
+# Example
+
+Input from same patients:
+
+- RNA expression
+- DNA-methylation measurements
+
+Predict cancer outcomes
+
 :::
+
+::: {.fragment}
+
+1. Both data views potentially have prognostic value
+2. Two view share some underlysing relationship with each other
+
+:::
+
+::: {.notes}
+
+- DNA methylation regulates gene expression --> could repress expression tumor suppresor genes  or promote expression of oncogenes
+
+:::
+
+
+## When would you want to do this analysis
+
+- Multiple modalities from same biological samples exist, specially when they share some underlying relationship in their signals
+
+- Making discoveries that are hidden in data analyses of single modality
+
+- Achieving more accurate predictions of the outcome variable
+
 
 ## Motivation and background 3
 

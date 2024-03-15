@@ -362,45 +362,91 @@
 <p>March 18, 2024</p>
 </div>
 </section>
-<section id="introduction" class="slide level2">
-<h2>Introduction</h2>
-<p>The paper is from <span class="citation" data-cites="ding2022cooperative">Ding et al. (<a href="#/reference" role="doc-biblioref" onclick="">2022</a>)</span></p>
+<section id="multiomics-data" class="slide level2">
+<h2>Multiomics data</h2>
+<p>Different types of molecular measurements (omics) from common set of samples</p>
+<ul>
+<li>Genomics</li>
+<li>Proteomics</li>
+<li>Metabolomics</li>
+<li>And more</li>
+</ul>
+</section>
+<section id="types-of-fusion-strategy" class="slide level2">
+<h2>Types of fusion strategy</h2>
+<ul>
+<li><p>Early</p>
+<ul>
+<li>Merge multiple data views into single representation than feed to model</li>
+</ul></li>
+<li><p>Late</p>
+<ul>
+<li>Individual models fit on distinct view, then predictions of thes models are combined into final predictor</li>
+</ul></li>
+<li><p>Mixing of both</p></li>
+</ul>
+<p>Analogy to LASSO, Ridge or elastic-net</p>
+</section>
+<section id="paper" class="slide level2">
+<h2>Paper</h2>
+<p>The paper is from <span class="citation" data-cites="ding2022cooperative">Ding et al. (<a href="#/reference" role="doc-biblioref" onclick="">2022</a>)</span>, supervised learning algorithm that focus on disease classification and treatment response prediction</p>
+<div class="fragment">
+<ul>
+<li>Addresses “fusion” in data-adaptive manner</li>
+<li>Combines different omics together, they call this “view”</li>
+</ul>
+</div>
 </section>
 <section id="motivation-and-background-1" class="slide level2">
 <h2>Motivation and background 1</h2>
+<p>Takes in data from various modalities mentioned earlier, integrating heterogenous features on common set of observations (say patients)</p>
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<p><strong>Note</strong></p>
+<p><strong>Example</strong></p>
 </div>
 <div class="callout-content">
+<p>Input from same patients:</p>
 <ul>
-<li>What kind of data does the algorith take</li>
+<li>RNA expression</li>
+<li>DNA-methylation measurements</li>
 </ul>
+<p>Predict cancer outcomes</p>
 </div>
 </div>
 </div>
+<div class="fragment">
+<ol type="1">
+<li>Both data views potentially have prognostic value</li>
+<li>Two view share some underlysing relationship with each other</li>
+</ol>
+</div>
+<aside class="notes">
+<ul>
+<li>DNA methylation regulates gene expression –&gt; could repress expression tumor suppresor genes or promote expression of oncogenes</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
-<section id="motivation-and-background-2" class="slide level2">
-<h2>Motivation and background 2</h2>
-<div class="callout callout-note callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Note</strong></p>
-</div>
-<div class="callout-content">
+<section id="when-would-you-want-to-do-this-analysis" class="slide level2">
+<h2>When would you want to do this analysis</h2>
 <ul>
-<li>When would you want to do this analysis</li>
+<li><p>Multiple modalities from same biological samples exist, specially when they share some underlying relationship in their signals</p></li>
+<li><p>Making discoveries that are hidden in data analyses of single modality</p></li>
+<li><p>Achieving more accurate predictions of the outcome variable</p></li>
 </ul>
-</div>
-</div>
-</div>
 </section>
 <section id="motivation-and-background-3" class="slide level2">
 <h2>Motivation and background 3</h2>
