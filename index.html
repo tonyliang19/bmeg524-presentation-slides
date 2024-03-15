@@ -29,7 +29,27 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
-  </style>
+    /* CSS for citations */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+      margin-bottom: 0em;
+    }
+    .hanging-indent div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }  </style>
   <link rel="stylesheet" href="index_files/libs/revealjs/dist/theme/quarto.css">
   <link rel="stylesheet" href="tachyons-minimal.css">
   <link href="index_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
@@ -327,39 +347,258 @@
     <div class="slides">
 
 
-<section id="section" class="slide level2">
-<h2></h2>
-<div class="f2">
+<section class="slide level2">
+
+<!--- This looks very ugly TODO: FIX THIS --->
+<p><br> <br></p>
+<div class="primary bold justify-center f-subheadline tj flex">
 <p>Cooperative learning for multiview analysis</p>
 </div>
 <p><br></p>
 <p><br></p>
-<div class="f3 bold">
+<div class="f2 bold">
 <p>Tony Liang</p>
-<!-- Msc student in Bioinformatics -->
 <p>BMEG524</p>
 <p>March 18, 2024</p>
 </div>
 </section>
-<section id="slide-1" class="slide level2">
-<h2>Slide 1</h2>
-<ul>
-<li>list</li>
-</ul>
+<section id="introduction" class="slide level2">
+<h2>Introduction</h2>
+<p>The paper is from <span class="citation" data-cites="ding2022cooperative">Ding et al. (<a href="#/reference" role="doc-biblioref" onclick="">2022</a>)</span></p>
 </section>
-<section id="slide-2" class="slide level2">
-<h2>Slide 2</h2>
+<section id="motivation-and-background-1" class="slide level2">
+<h2>Motivation and background 1</h2>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Note</strong></p>
+</div>
+<div class="callout-content">
 <ul>
-<li>list</li>
+<li>What kind of data does the algorith take</li>
 </ul>
+</div>
+</div>
+</div>
 </section>
-<section id="acknowledgements" class="slide level2 smaller">
+<section id="motivation-and-background-2" class="slide level2">
+<h2>Motivation and background 2</h2>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Note</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li>When would you want to do this analysis</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="motivation-and-background-3" class="slide level2">
+<h2>Motivation and background 3</h2>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Note</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li>What does it tell you</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="algorithm-1" class="slide level2">
+<h2>Algorithm 1</h2>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Note</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li>What is the theoretical underpinnings of the approach</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="algorithm-2" class="slide level2">
+<h2>Algorithm 2</h2>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Note</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li>How does it work?</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="algorithm-3" class="slide level2">
+<h2>Algorithm 3</h2>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Note</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li>What considerations are there when applying it?</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="quality-control-measures-1" class="slide level2">
+<h2>Quality control measures 1</h2>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Note</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li>How can you determine whether it worked?</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="quality-control-measures-2" class="slide level2">
+<h2>Quality control measures 2</h2>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Note</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li>What happens if your data were bad?</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="analysis-1" class="slide level2">
+<h2>Analysis 1</h2>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Note</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li>Are there special analysis considerations?</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="analysis-2" class="slide level2">
+<h2>Analysis 2</h2>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Note</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li>Controlling for sources of bias</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="analysis-3" class="slide level2">
+<h2>Analysis 3</h2>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Note</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li>Insights into analysis?</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="analysis-4" class="slide level2">
+<h2>Analysis 4</h2>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Note</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li>What is the biological interpretation?</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="end" class="slide level2">
 <h2></h2>
-<ul>
-<li>list</li>
-</ul>
+<p><br> <br></p>
+<p><br> <br></p>
+<div class="closing">
+<p>Questions?</p>
+</div>
+</section>
+<section id="reference" class="slide level2 smaller scrollable">
+<h2></h2>
 <div class="footer footer-default">
 
+</div>
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-ding2022cooperative" class="csl-entry" role="listitem">
+Ding, Daisy Yi, Shuangning Li, Balasubramanian Narasimhan, and Robert Tibshirani. 2022. <span>“Cooperative Learning for Multiview Analysis.”</span> <em>Proceedings of the National Academy of Sciences</em> 119 (38): e2202113119.
+</div>
 </div>
 </section>
     </div>
@@ -538,9 +777,9 @@
         // The "normal" size of the presentation, aspect ratio will be preserved
         // when the presentation is scaled to fit different resolutions. Can be
         // specified using percentage units.
-        width: 1280,
+        width: 1600,
 
-        height: 720,
+        height: 900,
 
         // Factor of the display size that should remain empty around the content
         margin: 0.1,

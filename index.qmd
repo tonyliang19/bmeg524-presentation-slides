@@ -8,10 +8,7 @@ format: revealjs
 
 <!--- This looks very ugly TODO: FIX THIS --->
 
-## 
-
 <br>
-
 <br>
 
 ::: {.primary .bold .justify-center .f-subheadline .tj .flex}
@@ -117,8 +114,22 @@ The paper is from @ding2022cooperative
 ::: {.callout-note}
 - What is the biological interpretation?
 :::
+
+
 ## {#end}
 
-Thank you!
+<br>
+<br>
+
+<br>
+<br>
+
+::: {.closing}
 
 Questions?
+
+:::
+
+
+
+## {#reference}
