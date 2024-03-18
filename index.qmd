@@ -4,7 +4,23 @@ author: "Tony Liang"
 course: "BMEG524"
 talk-date: "March 18, 2024"
 format: revealjs
+knitr: 
+  opts_chunk: 
+    R.options: 
+      knitr.table.html.attr: "quarto-disable-processing=true"
 ---
+
+```{r}
+#| echo: false
+#| include: false
+#| message: false
+#| warning: false
+
+# Setup block
+library(tidyverse)
+library(kableExtra)
+library(knitr)
+```
 
 <!--- This looks very ugly TODO: FIX THIS --->
 
@@ -40,11 +56,34 @@ format: revealjs
 
 Different types of molecular measurements (omics) from common set of samples
 
+:::: {.columns}
+
+
+<!-- ::: {.column width="10%"}
+::: -->
+
+::: {.column width="28%"}
+
+<br>
+
 - Genomics
 - Proteomics
 - Metabolomics
 - And more
 
+:::
+
+::: {.column width="72%"} 
+```{r}
+#| echo: false
+#| label: "fig-fusion"
+#| fig-cap: "Multiomics data fusion source"
+knitr::include_graphics("assets/fig1-a.png")
+```
+
+:::
+
+::::
 
 ## Types of fusion strategy
 
@@ -69,10 +108,11 @@ The paper is from @ding2022cooperative, supervised learning algorithm that focus
 - Addresses "fusion" in data-adaptive manner
 - Combines different omics together, they call this "view"
 
+
 :::
 
 
-## Motivation and background 1
+## Input data for the algorithm
 
 Takes in data from various modalities mentioned earlier, integrating heterogenous features on common set of observations (say patients)
 
@@ -116,21 +156,34 @@ Predict cancer outcomes
 
 ::: {.callout-note}
 
-
-Using this algorithm, we could model outcome of interest better by fusing different data views
+What does it tell you?
 
 :::
 
+Using this algorithm, we could model outcome of interest better by fusing different data views
 
-## Algorithm 1
+
+
+
+## Overview structure of Cooperative Learning
 <!-- 
 ::: {.callout-note}
 - What is the theoretical underpinnings of the approach
 ::: -->
 
-- A 
-- B
-- C
+```{r}
+#| label: "fig-underpinnig"
+#| fig-cap: "Types of approach of omics integration"
+knitr::include_graphics("assets/fig1-b.png")
+```
+
+::: {.notes}
+
+- When $\rho = 0$, it yields early fusion
+
+- When $\rho = 1$, it yields late fusion
+
+:::
 
 ## Algorithm 2
 
@@ -139,6 +192,13 @@ Using this algorithm, we could model outcome of interest better by fusing differ
 :::
 
 ## Algorithm 3
+
+
+::: {.callout-note}
+
+What considerations are there when applying it?
+
+:::
 
 - Requires omics from same providers
 - Runtime complexity is high due to iterative nature of the algorithm
@@ -192,11 +252,65 @@ knitr::include_graphics("assets/app_s3c-b.png")
 knitr::include_graphics("assets/app_s3c-c.png")
 ```
 
-## Analysis 1
+## Case Study on Labor Onset Prediction {.smaller}
 
-::: {.callout-note}
+<!-- ::: {.callout-note}
 - Are there special analysis considerations?
+::: -->
+
+Authors performed their algorithm on a labor dataset from another study^[@stelzer2021integrated]
+
+:::: {.columns}
+
+::: {.column width="35%"}
+
+- Measured proteome and metabolome from $53$ patients of a longitudinal study
+
+- [Predict time to spontaneous labor]{.fourth-colour}
+
+- The other study used LASSO^[@tibshirani1996regression] for each omics individually (like in late fussion)
+
 :::
+
+::: {.column width="5%"} 
+
+:::
+
+::: {.fragment .column width="60%"}
+
+```{r}
+#| echo: false
+#| label: "tbl-labor"
+# Then the kable
+sub_header <- c("", "Mean", "SD", "Mean", "SD", "Mean")
+data <- read.csv("data/labor.csv")
+# The kable goes here
+data %>% 
+  kable(align = "c", 
+        col.names = sub_header,
+        table.attr = "quarto-disable-processing=true"
+        ) %>%
+  add_header_above(c("Methods", "Test MSE" = 2, "Relative to early fusion" = 2, "Numbers of features selected")) %>% 
+  row_spec(5, bold = T, color="#a8201a") %>%
+  kable_styling(c("striped", "bordered"), full_width = FALSE)
+```
+
+:::
+
+::::
+
+
+
+::: {.notes}
+
+- 1,322 proteins, and the metabolomics data contained measurements for 3,529 metabolites
+
+- split the dataset of 53 patients into training and test sets of 40 and 13 patients, respectively
+
+- from blood samples, during the last $120$ day of pregnancy
+
+:::
+
 
 ## Analysis 2
 
@@ -209,6 +323,12 @@ knitr::include_graphics("assets/app_s3c-c.png")
 ::: {.callout-note}
 - Insights into analysis?
 :::
+
+<!-- ```{r}
+r1 <- c("Separate Proteomics", 475.51, 80.89, 69.14, 81.44, 26)
+r2 <- c("Separate Metabolomics", 381.13, 36.88, -25.24, 30.91, 11)
+r3 <- c("Early fusion", 406.37, )
+``` -->
 
 ## Analysis 4
 
