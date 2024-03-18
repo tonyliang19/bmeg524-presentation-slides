@@ -94,7 +94,7 @@ Different types of molecular measurements (omics) from common set of samples
 ```{r}
 #| echo: false
 #| label: "fig-fusion"
-#| fig-cap: "Multiomics data fusion source"
+#| fig-cap: "Multiomics data fusion source^[Adopted fig 1A from @ding2022cooperative]"
 knitr::include_graphics("assets/fig1-a.png")
 ```
 
@@ -230,11 +230,13 @@ for (i in 1:4) {
 
 ::::
 
-## Overview structure of Cooperative Learning
+## Overview structure of Cooperative Learning {.smaller}
 <!-- 
 ::: {.callout-note}
 - What is the theoretical underpinnings of the approach
 ::: -->
+
+
 
 ```{r}
 #| label: "fig-underpinnig"
@@ -368,7 +370,7 @@ Due to its `supervising` nature, one could verify its performance through variou
 
 ## What happens if data quality is not good?
 
-When the views are not correlated, this could be very [bad]{.secondary}^[Appendix Fig S3 from @ding2022cooperative]
+When the views are not correlated or no signal, this could be very [bad]{.secondary}^[Appendix Fig S3 from @ding2022cooperative]
 
 ```{r}
 #| echo: false
@@ -378,7 +380,7 @@ knitr::include_graphics("assets/app_s3c-a.png")
 
 ## What happens if data quality is not good?
 
-When the views are not correlated, this could be very [bad]{.secondary}^[Appendix Fig S3 from @ding2022cooperative]
+When the views are not correlated or no signal, this could be very [bad]{.secondary}^[Appendix Fig S3 from @ding2022cooperative]
 
 ```{r}
 #| echo: false
@@ -392,7 +394,7 @@ knitr::include_graphics("assets/app_s3c-c.png")
 
 ## What happens if data quality is not good?
 
-When the views are not correlated, this could be very [bad]{.secondary}^[Appendix Fig S3 from @ding2022cooperative]
+When the views are not correlated or no signal, this could be very [bad]{.secondary}^[Appendix Fig S3 from @ding2022cooperative]
 
 ```{r}
 #| echo: false
