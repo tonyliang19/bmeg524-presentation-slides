@@ -108,21 +108,24 @@ knitr::include_graphics("assets/fig1-a.png")
 [How to combine usage of different modalities?]{.secondary}
 
 
-- `Early`
+::: {.fragment}
 
+- `Early`
 
   - Merge multiple modalities into single representation first, then feed to ML model
   - Requires extracted features to be converted to a common format^[@poria2017review]
 
+:::
 
+::: {.fragment}
 
 - `Late`
   
   - Fit model on each individual modality, then predictions of these models are combined into final predictor
   - Allow more flexibility and easier to handle missing modality^[@liu2018learn]
 
+:::
 
-- `Mixing of both perhaps?`
 
 ::: {.notes}
 
@@ -227,27 +230,6 @@ for (i in 1:4) {
 
 ::::
 
-
-## Motivation and background 3
-
-::: {.callout-note}
-
-What does it tell you?
-
-:::
-
-Using this algorithm, we could model outcome of interest better by fusing different data views
-
-::: {.fragment}
-
-- Addresses "`fusion`" in data-adaptive manner
-- Combines different omics together, they call this "`view`"
-
-
-:::
-
-
-
 ## Overview structure of Cooperative Learning
 <!-- 
 ::: {.callout-note}
@@ -260,7 +242,18 @@ Using this algorithm, we could model outcome of interest better by fusing differ
 knitr::include_graphics("assets/fig1-b.png")
 ```
 
+::: {.fragment}
+
+- Addresses "`fusion`" in data-adaptive manner
+- Combines different omics together, they call this "`view`"
+
+:::
+
+
+
 ::: {.notes}
+
+- What means data-adaptive manner?
 
 - When $\rho = 0$, it yields early fusion
 
@@ -270,11 +263,57 @@ knitr::include_graphics("assets/fig1-b.png")
 
 
 
-## Algorithm 2
+## Little bit of math {.smaller}
 
-::: {.callout-note}
+<!-- ::: {.callout-note}
 - How does it work?
+::: -->
+
+From the original paper^[@ding2022cooperative], authors stated below:
+
+::: {.fragment .fade-in-then-semi-out}
+
+For [two]{.secondary} data views (main example from paper)
+
+$$\text{min} \quad E[\frac{1}{2} (y - f_{X}(X) - f_{Z}(Z))^2 + \frac{\rho}{2} (f_{X}(X) - f_{Z}(Z))^2]$${#eq-2d}
+
 :::
+
+::: {.fragment .fade-in-then-semi-out}
+
+For [more than two]{.secondary} data views (generalized version of above)
+
+$$\text{min} \quad E[\frac{1}{2} (y - \sum\limits_{m=1}^M f_{X_{m}}(X_{m}))^2 + \frac{\rho}{2} \sum\limits_{m < m'} (f_{X_{m}}(X_{m}) - f_{X_{m'}}(X_{m'}))^2]$${#eq-rn}
+
+:::
+
+::: {.fragment}
+
+Or `simplified` to the following with L1-regularization:
+
+$$J(\boldsymbol{\theta}_1, \boldsymbol{\theta}_2, \ldots, \boldsymbol{\theta}_M) = \frac{1}{2} \left\| \boldsymbol{y} - \sum\limits_{m=1}^{M} \boldsymbol{X}_m \boldsymbol{\theta}_m \right\|_2^2 + \frac{\rho}{2} \sum\limits_{m < m'} \left\| \left( \boldsymbol{X}_m \boldsymbol{\theta}_m - \boldsymbol{X}_{m'} \boldsymbol{\theta}_{m'} \right) \right\|_2^2 + \sum\limits_{m=1}^{M} \lambda_m \left\| \boldsymbol{\theta}_m \right\|_1$${#eq-jac}
+
+where $\rho$ is hyperparameter tunable by cross validation (CV), s.t. $\rho \in [0, 1]$, and $\theta_m$ are weights of each view that minimizes the objective.
+
+:::
+
+::: {.notes}
+
+- First term is squared error
+- Second term is agreement penalty
+
+- These theta are weights, and they have a good way of solving them through minimizing each lasso problem 
+
+- By varying the weight of the agreement penalty, cooperative learning yields a continuum of solutions that include early and late fusion:
+
+- adaptive strategy for optimizing over λx and λz. We call this “adaptive cooperative learning” in our studies.
+- With a common λ, the objective becomes like the Jacobian above                                                                        
+- They solve this by iteratively updating the $\theta$ by fixing one and optimizing others and relying on that the problem itself are convex (meaning computationally solvable)
+
+- Convexity ensures that all local optima are global optima. 
+
+:::
+
 
 ## What considerations are there when applying it?
 
@@ -289,6 +328,7 @@ Well we have the algorithm now, but it has sevaral key assumptions
 
 - Requires omics data from same providers --> [Might not always be feasible]{.fourth-colour}
 - Runtime complexity is high due to its iterative nature --> [Higher computation costs]{.fourth-colour}
+- Correlation between views --> [Might have to access other views]{.fourth-colour}
 <!-- - Works best if the omics itself are related each other -->
 - Extendable to both regression and classification --> [Careful of asking right question]{.fourth-colour}
 
@@ -303,19 +343,28 @@ Well we have the algorithm now, but it has sevaral key assumptions
 
 ## Evaluation of algorithm by metrics
 
-Due it supervising nature, one could verify its performance through various metrics by task performed:
+Due to its `supervising` nature, one could verify its performance through various metrics by task performed:
 
-- Classification
-  - A
-  - B
+- [Classification]{.secondary}
+  - Receiver operating characteristic (ROC) curve
+  - Accuracy 
+  - F1 score
 
-- Regression
-  - MSE
-  - MAE
+- [Regression]{.secondary}
+  - Mean squared error (MSE)
+  - Mean absolute error (MAE)
+  - Root mean squared error (RMSE), although could be derived from MSE
+
 
 <!-- ::: {.callout-note}
 - How can you determine whether it worked?
 ::: -->
+
+::: {.notes}
+
+- ROC curve balances true positive rate and false positive rate
+- F1 score is weighted average between precision and recall
+:::
 
 ## What happens if data quality is not good?
 
@@ -421,28 +470,78 @@ data %>%
 :::
 
 
-## Analysis 2
+## Case Study on Labor Onset Prediction
 
-::: {.callout-note}
+<!-- ::: {.callout-note}
 - Controlling for sources of bias
+::: -->
+
+```{r}
+#| echo: false
+#| label: "fig-labor-pred"
+#| fig-cap: " Distribution of time to delivery and predicted versus true time to delivery for training and test samples^[Fig S9 from @ding2022cooperative]"
+knitr::include_graphics("assets/predictions_labor.png")
+```
+
+
+## Cohort Study on COVID-19 {.smaller}
+
+Another study^[@er2023multimodal] that used Cooperative Learning combined with other ML and NLP techniques to predict the clinical outcome of COVID-19 patients.
+
+
+:::: {.columns}
+
+
+::: {.incremental .column width="43%"}
+
+
+- Predict ICU hospitalization (`binary` outcome)
+- $149$ patients, $63$ were admitted in ICU
+  - Only $89$ patients in model training
+- Possible [overfitting]{.secondary} due to class imbalance
+- [Stratified]{.secondary} and [nested]{.secondary} CV framework for estimating performances and controlling bias
+  - Also, repeated the CV procedure $30$ times
+
 :::
 
-## Analysis 3
+::: {.column width="57%"}
 
-::: {.callout-note}
-- Insights into analysis?
+```{r}
+#| echo: false
+#| label: "fig-covid"
+#| fig-cap: "Number of patients in the cohort with different  modalities"
+knitr::include_graphics("assets/covid19_pat.png")
+```
+
 :::
 
-<!-- ```{r}
-r1 <- c("Separate Proteomics", 475.51, 80.89, 69.14, 81.44, 26)
-r2 <- c("Separate Metabolomics", 381.13, 36.88, -25.24, 30.91, 11)
-r3 <- c("Early fusion", 406.37, )
-``` -->
+::::
 
-## Analysis 4
+::: {.notes}
 
-::: {.callout-note}
+- Used combinations of NLP word2vec for viral embedding, and mixxed with imaging stuff to get these predictions
+
+:::
+
+## Cohort Study on COVID-19
+
+<!-- ::: {.callout-note}
 - What is the biological interpretation?
+::: -->
+
+The algorithm identified key biomarkers that played bigger role in determining ICU hospitalization of patients and relationship between modalities:
+
+- Serum biomarkers mainly found to be correlated with radiomics features related to the distribution of voxel intensities.
+
+- LDH, ESR, CRP, albumin, and total bilirubin were the selected serum biomarkers
+
+<!-- - age, chronic disease, and CCI were the clinical variables of the CLRW model. -->
+
+::: {.notes}
+
+- Serum biomarker: substances changing quantitatively in the serum during tumor development. 
+  - Classically, a marker is synthesized by the tumor and released into circulation or expressed at the cell surface in large quantity by malignant cells
+
 :::
 
 
