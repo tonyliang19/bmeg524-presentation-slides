@@ -1,0 +1,6 @@
+"Methods","Test_MSE_Mean","Test_MSE_SD","Relative_to_early_fusion_Mean","Relative_to_early_fusion_SD","Number_of_features_selected_Mean"
+"Separate proteomics",475.51,80.89,69.14,81.44,26
+"Separate metabolomics",381.13,36.88,-25.24,30.91,11
+"Early fusion",406.37,44.77,0,0,15
+"Late fusion",493.34,63.44,86.97,68.13,21
+"Cooperative learning",335.84,38.51,-70.53,32.6,52
