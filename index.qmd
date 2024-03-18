@@ -38,10 +38,14 @@ library(knitr)
 <br>
 
 
-::: {.f2 .bold}
+::: {.f1 .bold .tc}
+
+<br>
+
 
 {{< meta author >}} 
 
+<br>
 
 {{< meta course >}}
 
