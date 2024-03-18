@@ -20,6 +20,19 @@ knitr:
 library(tidyverse)
 library(kableExtra)
 library(knitr)
+
+# Params to use
+secondary = "#e98a15"
+primary = "#2c365e"
+tertiary = "#0a8754"
+fourth_color = "#a8201a"
+
+## for simplicity
+purple = primary
+blue = primary
+orange = secondary
+green = tertiary
+red = fourth_color
 ```
 
 <!--- This looks very ugly TODO: FIX THIS --->
@@ -91,34 +104,46 @@ knitr::include_graphics("assets/fig1-a.png")
 
 ## Types of fusion strategy
 
-- Early
 
-  - Merge multiple data views into single representation than feed to model
+[How to combine usage of different modalities?]{.secondary}
 
-- Late
+
+- `Early`
+
+
+  - Merge multiple modalities into single representation first, then feed to ML model
+  - Requires extracted features to be converted to a common format^[@poria2017review]
+
+
+
+- `Late`
   
-  - Individual models fit on distinct view, then predictions of thes models are combined into final predictor
-
-- Mixing of both
-
-Analogy to LASSO, Ridge or elastic-net
-
-## Paper
-
-The paper is from @ding2022cooperative, supervised learning algorithm that focus on disease classification and treatment response prediction
-
-::: {.fragment}
-
-- Addresses "fusion" in data-adaptive manner
-- Combines different omics together, they call this "view"
+  - Fit model on each individual modality, then predictions of these models are combined into final predictor
+  - Allow more flexibility and easier to handle missing modality^[@liu2018learn]
 
 
+- `Mixing of both perhaps?`
+
+::: {.notes}
+
+- Early fusion, fewer literatures that adopt 
+  - The training pipeline is simple as only one model is involved. 
+  - It usually requires the features from different modalities to be highly engineered and preprocessed so that they align well or are similar in their semantics.
+
+
+- Late fusion, more dominant in lit 
+
+- Analogy to LASSO, Ridge or elastic-net
+
+-  as predictions are made separately
 :::
+
 
 
 ## Input data for the algorithm
 
 Takes in data from various modalities mentioned earlier, integrating heterogenous features on common set of observations (say patients)
+
 
 ::: {.callout-note}
 
@@ -135,10 +160,12 @@ Predict cancer outcomes
 
 ::: {.fragment}
 
+
 1. Both data views potentially have prognostic value
 2. Two view share some underlysing relationship with each other
 
 :::
+
 
 ::: {.notes}
 
@@ -147,13 +174,58 @@ Predict cancer outcomes
 :::
 
 
-## When would you want to do this analysis
+## When would you want to do this analysis?
 
-- Multiple modalities from same biological samples exist, specially when they share some underlying relationship in their signals
+:::: {.columns}
 
-- Making discoveries that are hidden in data analyses of single modality
+::: {.fragment .fade-in-then-semi-out .column width="50%"}
+
+- Access to multiple modalities data from [same]{.secondary} biological samples
+  <!-- - Specially when they share some underlying relationship in their signals -->
+
+- Making discoveries that are [hidden]{.secondary} in data analyses of single modality
+  <!-- - Say, you want to see how RNA expressions can interact with DNA methylation -->
 
 - Achieving more accurate predictions of the outcome variable
+
+:::
+
+::: {.fragment .column width="50%"}
+
+<br>
+<br>
+
+```{r}
+#| echo: false
+#| fig-align: center
+cols = c(blue, red, green, orange)
+par(mfrow = c(2, 2), bty = "n", ann = FALSE, xaxt = "n", yaxt = "n", 
+    family = "serif", mar = c(0, 0, 0, 0), oma = c(0, 2, 2, 0))
+library(mvtnorm)
+mv <- matrix(c(0, 0, 0, 0, -.5, -.5, -.5, -.5), 4, byrow = TRUE)
+va <- matrix(c(.02, .02, .1, .1, .02, .02, .1, .1), 4, byrow = TRUE)
+
+for (i in 1:4) {
+  plot(0, 0, ylim = c(-2, 2), xlim = c(-2, 2), pch = 19, cex = 42, 
+       col = blue, ann = FALSE, pty = "s")
+  points(0, 0, pch = 19, cex = 30, col = "white")
+  points(0, 0, pch = 19, cex = 18, col = green)
+  points(0, 0, pch = 19, cex = 6, col = orange)
+  points(rmvnorm(20, mean = mv[i, ], sigma = diag(va[i, ])), cex = 1, pch = 19)
+  switch(i,
+    "1" = {
+      mtext("low variance", 3, cex = 2)
+      mtext("low bias", 2, cex = 2)
+    },
+    "2" = mtext("high variance", 3, cex = 2),
+    "3" = mtext("high bias", 2, cex = 2)
+  )
+}
+```
+
+:::
+
+::::
 
 
 ## Motivation and background 3
@@ -166,6 +238,13 @@ What does it tell you?
 
 Using this algorithm, we could model outcome of interest better by fusing different data views
 
+::: {.fragment}
+
+- Addresses "`fusion`" in data-adaptive manner
+- Combines different omics together, they call this "`view`"
+
+
+:::
 
 
 
@@ -177,7 +256,7 @@ Using this algorithm, we could model outcome of interest better by fusing differ
 
 ```{r}
 #| label: "fig-underpinnig"
-#| fig-cap: "Types of approach of omics integration"
+#| fig-cap: "Fusion strategies of views"
 knitr::include_graphics("assets/fig1-b.png")
 ```
 
@@ -189,32 +268,54 @@ knitr::include_graphics("assets/fig1-b.png")
 
 :::
 
+
+
 ## Algorithm 2
 
 ::: {.callout-note}
 - How does it work?
 :::
 
-## Algorithm 3
+## What considerations are there when applying it?
 
 
-::: {.callout-note}
+::: {.callout-important}
 
-What considerations are there when applying it?
+Well we have the algorithm now, but it has sevaral key assumptions
 
 :::
 
-- Requires omics from same providers
-- Runtime complexity is high due to iterative nature of the algorithm
-- Works best if the omics itself are related each other
+::: {.incremental}
+
+- Requires omics data from same providers --> [Might not always be feasible]{.fourth-colour}
+- Runtime complexity is high due to its iterative nature --> [Higher computation costs]{.fourth-colour}
+<!-- - Works best if the omics itself are related each other -->
+- Extendable to both regression and classification --> [Careful of asking right question]{.fourth-colour}
+
+:::
+
+::: {.notes}
+
+- More about what if input data not good later
+
+:::
 
 
+## Evaluation of algorithm by metrics
 
-## Quality control measures 1
+Due it supervising nature, one could verify its performance through various metrics by task performed:
 
-::: {.callout-note}
+- Classification
+  - A
+  - B
+
+- Regression
+  - MSE
+  - MAE
+
+<!-- ::: {.callout-note}
 - How can you determine whether it worked?
-:::
+::: -->
 
 ## What happens if data quality is not good?
 
@@ -266,17 +367,17 @@ Authors performed their algorithm on a labor dataset from another study^[@stelze
 
 :::: {.columns}
 
-::: {.column width="35%"}
+::: {.column width="37%"}
 
 - Measured proteome and metabolome from $53$ patients of a longitudinal study
 
-- [Predict time to spontaneous labor]{.fourth-colour}
+- [Predict time (days) to spontaneous labor]{.fourth-colour}
 
 - The other study used LASSO^[@tibshirani1996regression] for each omics individually (like in late fussion)
 
 :::
 
-::: {.column width="5%"} 
+::: {.column width="3%"} 
 
 :::
 
@@ -285,6 +386,8 @@ Authors performed their algorithm on a labor dataset from another study^[@stelze
 ```{r}
 #| echo: false
 #| label: "tbl-labor"
+#| tbl-cap-location: bottom
+#| tbl-cap: "Multiomics studies on labor-onset prediction^[@ding2022cooperative]"
 # Then the kable
 sub_header <- c("", "Mean", "SD", "Mean", "SD", "Mean")
 data <- read.csv("data/labor.csv")
@@ -312,6 +415,8 @@ data %>%
 - split the dataset of 53 patients into training and test sets of 40 and 13 patients, respectively
 
 - from blood samples, during the last $120$ day of pregnancy
+
+- Units are days, so MSE need to take square root here to explain
 
 :::
 
