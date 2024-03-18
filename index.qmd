@@ -115,14 +115,22 @@ Predict cancer outcomes
 ## Motivation and background 3
 
 ::: {.callout-note}
-- What does it tell you
+
+
+Using this algorithm, we could model outcome of interest better by fusing different data views
+
 :::
+
 
 ## Algorithm 1
-
+<!-- 
 ::: {.callout-note}
 - What is the theoretical underpinnings of the approach
-:::
+::: -->
+
+- A 
+- B
+- C
 
 ## Algorithm 2
 
@@ -132,9 +140,11 @@ Predict cancer outcomes
 
 ## Algorithm 3
 
-::: {.callout-note}
-- What considerations are there when applying it?
-:::
+- Requires omics from same providers
+- Runtime complexity is high due to iterative nature of the algorithm
+- Works best if the omics itself are related each other
+
+
 
 ## Quality control measures 1
 
@@ -142,12 +152,45 @@ Predict cancer outcomes
 - How can you determine whether it worked?
 :::
 
-## Quality control measures 2
+## What happens if data quality is not good?
 
-::: {.callout-note}
-- What happens if your data were bad?
-:::
+When the views are not correlated, this could be very [bad]{.secondary}^[Appendix Fig S3 from @ding2022cooperative]
 
+```{r}
+#| echo: false
+#| fig-cap: "Both X, Z contains signal, no correlation"
+knitr::include_graphics("assets/app_s3c-a.png")
+```
+
+## What happens if data quality is not good?
+
+When the views are not correlated, this could be very [bad]{.secondary}^[Appendix Fig S3 from @ding2022cooperative]
+
+```{r}
+#| echo: false
+#| layout-ncol: 2
+#| fig-cap: 
+#| - "Both X, Z contains signal, no correlation"
+#| - "Only X contains signal"
+knitr::include_graphics("assets/app_s3c-a.png")
+knitr::include_graphics("assets/app_s3c-c.png")
+```
+
+## What happens if data quality is not good?
+
+When the views are not correlated, this could be very [bad]{.secondary}^[Appendix Fig S3 from @ding2022cooperative]
+
+```{r}
+#| echo: false
+#| layout-ncol: 3
+#| fig-cap: 
+#| - "Both X, Z contains signal"
+#| - "X with more signal than Z"
+#| - "Only X contains signal"
+knitr::include_graphics("assets/app_s3c-a.png")
+knitr::include_graphics("assets/app_s3c-b.png")
+knitr::include_graphics("assets/app_s3c-c.png")
+```
 
 ## Analysis 1
 
